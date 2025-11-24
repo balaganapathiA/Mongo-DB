@@ -12,6 +12,12 @@ def redirected_page(request):
 
 def render_page(request):
     posts = [
-     
+        {'title':'post1','content':'post 1 content'},
+        {'title':'post2','content':'post 2 content'},
+        {'title':'post3','content':'post 3 content'},
+        {'title':'post4','content':'post 4 content'},
         ]
     return render(request,"index.html",{'posts':posts})
+
+def detail_page(request,id):
+    return render(request,"detail.html")
