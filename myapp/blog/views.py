@@ -11,4 +11,10 @@ def redirected_page(request):
     return HttpResponse("url redirected succesfully")
 
 def render_page(request):
-    return render(request,"index.html")
+    posts = [
+        {'title':'post1','content':'post 1 content'},
+        {'title':'post2','content':'post 2 content'},
+        {'title':'post3','content':'post 3 content'},
+        {'title':'post4','content':'post 4 content'},
+        ]
+    return render(request,"index.html",{'posts':posts})
