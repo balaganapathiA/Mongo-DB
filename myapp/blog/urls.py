@@ -5,5 +5,5 @@ urlpatterns = [
     path('new_url', views.redirected_page,name='new'),
     path('old_url', views.url_redirect,name='old'),
     path('render', views.render_page,name='render'),
-    path('detail/<str:id>', views.detail_page,name='detail'),
+    path('detail/<str:slug>', views.detail_page,name='detail'),
 ]

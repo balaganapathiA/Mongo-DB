@@ -22,10 +22,10 @@ def render_page(request):
     posts=Post.objects.all()
     return render(request,"index.html",{'posts':posts})
 
-def detail_page(request,id):
+def detail_page(request,slug):
     # post_details = next((item for item in posts if item["id"] == id),None)
     try:
-        post_details=Post.objects.get(pk=id)
+        post_details=Post.objects.get(slug=slug)
     except Post.DoesNotExist:
         raise Http404("404 Page")
     log = logging.getLogger("testing")
