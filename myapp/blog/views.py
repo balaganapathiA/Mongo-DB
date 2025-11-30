@@ -26,8 +26,9 @@ def detail_page(request,slug):
     # post_details = next((item for item in posts if item["id"] == id),None)
     try:
         post_details=Post.objects.get(slug=slug)
+        related_posts  = Post.objects.filter(category = post_details.category).exclude(pk=post_details.id)
     except Post.DoesNotExist:
         raise Http404("404 Page")
     log = logging.getLogger("testing")
     log.debug(f'id {post_details} {id} of detail page')
-    return render(request,"detail.html",{"post_details":post_details})
+    return render(request,"detail.html",{"post_details":post_details, 'related_posts':related_posts})
