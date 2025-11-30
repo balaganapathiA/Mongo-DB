@@ -17,3 +17,10 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+# Category
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self) :
+        return self.name
