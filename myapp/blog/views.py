@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404
 import logging
+from django.core.paginator import Paginator
 from .models import Post
 # posts = [
 #         {'title':'post1','content':'post 1 content'},
@@ -19,8 +20,16 @@ def redirected_page(request):
     return HttpResponse("url redirected succesfully")
 
 def render_page(request):
-    posts=Post.objects.all()
-    return render(request,"index.html",{'posts':posts})
+     # getting data from post model
+    all_posts = Post.objects.all()
+
+    # paginate
+    paginator = Paginator(all_posts, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    log = logging.getLogger("testing")
+    log.debug(f'page_obj {page_obj}')
+    return render(request,"index.html",{'posts':page_obj})
 
 def detail_page(request,slug):
     # post_details = next((item for item in posts if item["id"] == id),None)
