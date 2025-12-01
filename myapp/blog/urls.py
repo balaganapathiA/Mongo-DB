@@ -6,4 +6,5 @@ urlpatterns = [
     path('old_url', views.url_redirect,name='old'),
     path('render', views.render_page,name='render'),
     path('detail/<str:slug>', views.detail_page,name='detail'),
+    path('contact', views.contact_page,name='contact'),
 ]
