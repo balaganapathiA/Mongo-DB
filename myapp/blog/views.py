@@ -4,7 +4,7 @@ import logging
 from django.core.paginator import Paginator
 from .models import Post,AboutUs
 
-from .forms import ContactForm
+from .forms import ContactForm,RegisterForm
 # posts = [
 #         {'title':'post1','content':'post 1 content'},
 #         {'title':'post2','content':'post 2 content'},
@@ -70,4 +70,8 @@ def about_page(request):
     return render(request,'about.html',{'about_content':about_content})
 
 def register_page(request):
-    return render(request,'register.html')
+    form = RegisterForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+
+    return render(request,'register.html',{'form':form})

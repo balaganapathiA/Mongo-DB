@@ -15,9 +15,9 @@ class RegisterForm(forms.ModelForm):
     password = forms.CharField(label='password', max_length=100, required=True)
     password_confirm = forms.CharField(label='password confirm', max_length=100, required=True)
 
-#     class Meta:
-#         model = User
-#         fields = ['username', 'email', 'password']
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
 
 #     def clean(self):
 #         cleaned_data = super().clean()
