@@ -9,11 +9,11 @@ class ContactForm(forms.Form):
     email = forms.EmailField(label='Email',  required=True)
     message = forms.CharField(label='Message',  required=True)
 
-# class RegisterForm(forms.ModelForm):
-#     username = forms.CharField(label='username', max_length=100, required=True)
-#     email = forms.CharField(label='email', max_length=100, required=True)
-#     password = forms.CharField(label='password', max_length=100, required=True)
-#     password_confirm = forms.CharField(label='password confirm', max_length=100, required=True)
+class RegisterForm(forms.ModelForm):
+    username = forms.CharField(label='username', max_length=100, required=True)
+    email = forms.CharField(label='email', max_length=100, required=True)
+    password = forms.CharField(label='password', max_length=100, required=True)
+    password_confirm = forms.CharField(label='password confirm', max_length=100, required=True)
 
 #     class Meta:
 #         model = User
