@@ -25,6 +25,14 @@
                         {% endfor %}
                     </div>
                 {% endif %}
+                {% comment %} success message {% endcomment %}
+                {% if messages %}
+                    <div class="alert alert-success">
+                        {% for message in messages %}
+                        <span class="text-success"> {{message}} </span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
             <div class="my-3">
                 <form method="post">

@@ -3,7 +3,7 @@ from django.http import HttpResponse,Http404
 import logging
 from django.core.paginator import Paginator
 from .models import Post,AboutUs
-
+from django.contrib import messages
 from .forms import ContactForm,RegisterForm
 # posts = [
 #         {'title':'post1','content':'post 1 content'},
@@ -77,5 +77,6 @@ def register_page(request):
             user=form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()
+            messages.success(request,"Register Panniyachi...!.Neenga Ipa Login Pannalam")
             print("register Successfull")
     return render(request,'register.html',{'form':form})
