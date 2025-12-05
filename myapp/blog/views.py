@@ -68,3 +68,6 @@ def about_page(request):
     else:
         about_content=about_content.content
     return render(request,'about.html',{'about_content':about_content})
+
+def register_page(request):
+    return render(request,'register.html')
