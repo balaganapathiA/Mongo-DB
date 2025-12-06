@@ -4,7 +4,7 @@ import logging
 from django.core.paginator import Paginator
 from .models import Post,AboutUs
 from django.contrib import messages
-from .forms import ContactForm,RegisterForm
+from .forms import ContactForm,RegisterForm,LoginForm
 # posts = [
 #         {'title':'post1','content':'post 1 content'},
 #         {'title':'post2','content':'post 2 content'},
@@ -82,4 +82,9 @@ def register_page(request):
     return render(request,'register.html',{'form':form})
 
 def login_page(request):
-    return render(request,'login.html')
+    form = LoginForm()
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            print("login Success")
+    return render(request,'login.html',{'form':form})

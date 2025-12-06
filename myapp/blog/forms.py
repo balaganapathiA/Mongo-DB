@@ -27,9 +27,9 @@ class RegisterForm(forms.ModelForm):
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError("Password Same aa illa.")
 
-# class LoginForm(forms.Form):
-#     username = forms.CharField(label='username', max_length=100, required=True)
-#     password = forms.CharField(label='password', max_length=100, required=True)
+class LoginForm(forms.Form):
+    username = forms.CharField(label='username', max_length=100, required=True)
+    password = forms.CharField(label='password', max_length=100, required=True)
 
 #     def clean(self):
 #         cleaned_data = super().clean()
