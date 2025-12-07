@@ -6,7 +6,7 @@ from .models import Post,AboutUs
 from django.contrib import messages
 from django.contrib.messages import get_messages
 from .forms import ContactForm,RegisterForm,LoginForm
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 # posts = [
 #         {'title':'post1','content':'post 1 content'},
 #         {'title':'post2','content':'post 2 content'},
@@ -111,3 +111,8 @@ def login_page(request):
 
 def dashboard_page(request):
     return render(request,'dashboard.html')
+
+def logout_page(request):
+    logout(request)
+    return redirect('login')
+    
