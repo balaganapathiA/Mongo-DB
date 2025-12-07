@@ -115,4 +115,7 @@ def dashboard_page(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+def forgot_page(request):
+    return render(request,'forgot_password.html')
     
