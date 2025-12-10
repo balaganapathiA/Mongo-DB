@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.messages import get_messages
 from .forms import ContactForm,RegisterForm,LoginForm,ForgotPasswordForm
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.models import User
 
 
 from django.contrib.auth.tokens import default_token_generator
@@ -151,4 +152,6 @@ def forgot_page(request):
 
 
     return render(request,'forgot_password.html', {'form': form})
-    
+
+def reset_page(request, uidb64, token):
+    return render(request,'reset_password.html')
