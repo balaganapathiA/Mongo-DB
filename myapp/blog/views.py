@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from .models import Post,AboutUs
 from django.contrib import messages
 from django.contrib.messages import get_messages
-from .forms import ContactForm,RegisterForm,LoginForm,ForgotPasswordForm
+from .forms import ContactForm,RegisterForm,LoginForm,ForgotPasswordForm,ResetPasswordForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 
@@ -154,4 +154,24 @@ def forgot_page(request):
     return render(request,'forgot_password.html', {'form': form})
 
 def reset_page(request, uidb64, token):
-    return render(request,'reset_password.html')
+    form = ResetPasswordForm()
+    if request.method == 'POST':
+        #form
+        form = ResetPasswordForm(request.POST)
+        if form.is_valid():
+            new_password = form.cleaned_data['new_password']
+            try:
+                uid = urlsafe_base64_decode(uidb64)
+                user = User.objects.get(pk=uid)
+            except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+                user = None
+
+            if user is not None and default_token_generator.check_token(user, token):
+                user.set_password(new_password)
+                user.save()
+                messages.success(request, 'Your password has been reset successfully!')
+                return redirect('login')
+            else :
+                messages.error(request,'The password reset link is invalid')
+
+    return render(request,'reset_password.html', {'form': form})

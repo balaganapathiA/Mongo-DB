@@ -21,10 +21,10 @@
                 {% endif %}
                 {% comment %} success message {% endcomment %}
                 {% if messages %}
-                    <div class="alert alert-success">
-                        {% for message in messages %}
-                        <span class="text-success"> {{message}} </span>
-                        {% endfor %}
+                {% for message in messages %}
+                <div class="alert {% if message.tags == 'success' %} alert-success {% else %} alert-danger {% endif %}">
+                        <span class="{% if message.tags == 'success' %} text-success {% else %} text-danger {% endif %}"> {{message}} </span>
                     </div>
+                        {% endfor %}
                 {% endif %}
           
