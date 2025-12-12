@@ -66,13 +66,11 @@ class PostForm(forms.ModelForm):
     title = forms.CharField(label='Title', max_length=200, required=True)
     content = forms.CharField(label='Content', required=True)
     category =  forms.ModelChoiceField(label='Category', required=True, queryset=Category.objects.all())
-    # img_url = forms.ImageField(label='Image', required=False)
+    img_url = forms.ImageField(label='Image', required=False)
 
     class Meta:
         model = Post
-        fields = ['title', 'content', 'category'
-        # , 'img_url'
-        ]
+        fields = ['title', 'content', 'category', 'img_url' ]
 
     def clean(self):
         cleaned_data = super().clean()
@@ -87,14 +85,15 @@ class PostForm(forms.ModelForm):
             raise forms.ValidationError('Content must be at least 10 Characters long.')
     
     def save(self, commit = ...):
-        post =  super().save(commit)
-#         cleaned_data = super().clean()
 
-#         if cleaned_data.get('img_url'):
-#             post.img_url = cleaned_data.get('img_url')
-#         else:
-        img_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png"
-        post.img_url = img_url
+        post =  super().save(commit)
+        cleaned_data = super().clean()
+
+        if cleaned_data.get('img_url'):
+            post.img_url = cleaned_data.get('img_url')
+        else:
+            img_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png"
+            post.img_url = img_url
 
         if commit:
             post.save()
