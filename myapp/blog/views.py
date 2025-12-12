@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse,Http404
 import logging
 from django.core.paginator import Paginator
-from .models import Post,AboutUs
+from .models import Post,AboutUs,Category
 from django.contrib import messages
 from django.contrib.messages import get_messages
 from .forms import ContactForm,RegisterForm,LoginForm,ForgotPasswordForm,ResetPasswordForm
@@ -182,4 +182,6 @@ def reset_page(request, uidb64, token):
 
     return render(request,'reset_password.html', {'form': form})
 def new_post_page(request):
-    return render(request,'new_post.html')
+    # getting data from Category model
+    all_category = Category.objects.all()
+    return render(request,'new_post.html',{'categories':all_category})
