@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 from .models import Post,AboutUs,Category
 from django.contrib import messages
 from django.contrib.messages import get_messages
-from .forms import ContactForm,RegisterForm,LoginForm,ForgotPasswordForm,ResetPasswordForm
+from .forms import ContactForm,RegisterForm,LoginForm,ForgotPasswordForm,ResetPasswordForm,PostForm
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 
@@ -184,4 +184,13 @@ def reset_page(request, uidb64, token):
 def new_post_page(request):
     # getting data from Category model
     all_category = Category.objects.all()
-    return render(request,'new_post.html',{'categories':all_category})
+    form = PostForm()
+    if request.method == 'POST':
+        #form
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('dashboard')
+    return render(request,'new_post.html', {'categories': all_category, 'form': form})
