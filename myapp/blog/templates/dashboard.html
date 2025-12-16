@@ -43,6 +43,17 @@
                                      <a href={% url 'detail' slug=post.slug %}>Read More</a>
                                     <a class="text-decoration-none text-dark fw-bold" href="#">{{post.category.name}}</a>
                                 </div>
+                                 <div class="d-flex justify-content-between mt-2">
+                                    {% comment %} {% if perms.blog.change_post %} {% endcomment %}
+                                    <a class="btn btn-warning btn-sm" href="{% url 'edit_post_page' post_id=post.id %}">Edit Post</a>
+                                    {% comment %} {% endif %} {% endcomment %}
+                                    {% comment %} {% if perms.blog.delete_post %}
+                                    <button class="btn btn-danger btn-sm" onclick="confirmBeforeDelete(`{% url 'delete_post' post_id=post.id %}`)">Delete Post</button>
+                                    {% endif %}
+                                    {% if not post.is_published and perms.blog.can_publish %}
+                                        <a href="{% url 'publish_post' post_id=post.id %}" class="btn btn-success btn-sm">Publish</a>
+                                    {% endif %} {% endcomment %}
+                                </div>
                             </div>
                         </div>
                     </div>
